@@ -23,7 +23,6 @@ class UpdateSubscriptionRequest extends FormRequest
     {
         return [
             'plan' => 'required|in:Lite,Starter,Premium',
-            'users_count' => 'required|integer|min:1',
             'billing_cycle' => 'required|in:monthly,yearly',
         ];
     }

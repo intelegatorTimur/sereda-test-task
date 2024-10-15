@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateSubscriptionRequest;
 use App\Interfaces\SubscriptionInterface;
 use App\Models\Subscription;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 
@@ -16,11 +13,17 @@ class SubscriptionController extends Controller
 {
     private SubscriptionInterface $subscriptionService;
 
+    /**
+     * @param SubscriptionInterface $subscriptionService
+     */
     public function __construct(SubscriptionInterface $subscriptionService)
     {
         $this->subscriptionService = $subscriptionService;
     }
 
+    /**
+     * @return View
+     */
     public function show(): View
     {
         $subscription = Subscription::first();
@@ -28,6 +31,10 @@ class SubscriptionController extends Controller
         return view('subscription.show', compact('subscription'));
     }
 
+    /**
+     * @param UpdateSubscriptionRequest $request
+     * @return RedirectResponse
+     */
     public function update(UpdateSubscriptionRequest $request): RedirectResponse
     {
         $subscription = Subscription::first();

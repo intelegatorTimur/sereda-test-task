@@ -7,10 +7,9 @@
             <div class="card-body">
                 <h5 class="card-title">Current Subscription</h5>
                 <p>Plan: {{ $subscription->plan }}</p>
-                <p>Users: {{ $subscription->users_count }}</p>
-                <p>Total Price: €{{ number_format($subscription->total_price, 2) }}</p>
-                <p>Billing Cycle: {{ ucfirst($subscription->billing_cycle) }}</p>
-                <p>Next Billing Date: {{ $subscription->next_billing_date->format('d.m.Y') }}</p>
+                <p>Total Price: {{ number_format($subscription->total_price, 2) }}</p>
+                <p>Billing Subscription: {{ ucfirst($subscription->billing_cycle) }}</p>
+                <p>Next subscription Date: {{ $subscription->next_billing_date->format('d.m.Y') }}</p>
             </div>
         </div>
 
@@ -24,15 +23,10 @@
                     <div class="form-group">
                         <label for="plan">Plan</label>
                         <select name="plan" id="plan" class="form-control">
-                            <option value="Lite" {{ $subscription->plan == 'Lite' ? 'selected' : '' }}>Lite (€4/user/month)</option>
-                            <option value="Starter" {{ $subscription->plan == 'Starter' ? 'selected' : '' }}>Starter (€6/user/month)</option>
-                            <option value="Premium" {{ $subscription->plan == 'Premium' ? 'selected' : '' }}>Premium (€10/user/month)</option>
+                            <option value="Lite" {{ $subscription->plan == 'Lite' ? 'selected' : '' }}>Lite (4/user/month)</option>
+                            <option value="Starter" {{ $subscription->plan == 'Starter' ? 'selected' : '' }}>Starter (6/user/month)</option>
+                            <option value="Premium" {{ $subscription->plan == 'Premium' ? 'selected' : '' }}>Premium (10/user/month)</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="users_count">Number of Users</label>
-                        <input type="number" name="users_count" id="users_count" class="form-control" value="{{ $subscription->users_count }}" min="1">
                     </div>
 
                     <div class="form-group">
