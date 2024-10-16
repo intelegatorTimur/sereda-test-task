@@ -27,7 +27,8 @@ class SubscriptionService implements SubscriptionInterface
      */
     public function calculateSubcriptionPrice(string $plan, int $usersCount, string $subscriptionCycle): float
     {
-        $subscriptionPlans = config('subscriptions.plans');
+        $subscriptionPlans = config('subscription.plans');
+
         $basePrice = $subscriptionPlans[$plan];
         $pricingStrategy = $this->subscriptionStrategyFactory->createSubscriptionStrategy($subscriptionCycle);
         return $pricingStrategy->calculate($usersCount, $basePrice);

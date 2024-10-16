@@ -26,6 +26,7 @@ class SubscriptionController extends Controller
      */
     public function show(): View
     {
+
         $subscription = $this->subscriptionService->getSubscription();
         return view('subscription.show', compact('subscription'));
     }
