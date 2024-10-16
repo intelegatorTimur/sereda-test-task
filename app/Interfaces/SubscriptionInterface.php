@@ -19,4 +19,9 @@ interface SubscriptionInterface
      * @return float
      */
     public function calculateSubcriptionPrice(string $plan, int $usersCount, string $subscriptionCycle): float;
+
+    /**
+     * @return Subscription
+     */
+    public function getSubscription(): Subscription;
 }

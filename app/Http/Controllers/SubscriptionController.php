@@ -26,8 +26,7 @@ class SubscriptionController extends Controller
      */
     public function show(): View
     {
-        $subscription = Subscription::first();
-
+        $subscription = $this->subscriptionService->getSubscription();
         return view('subscription.show', compact('subscription'));
     }
 
@@ -37,7 +36,7 @@ class SubscriptionController extends Controller
      */
     public function update(UpdateSubscriptionRequest $request): RedirectResponse
     {
-        $subscription = Subscription::first();
+        $subscription = $this->subscriptionService->getSubscription();
         $updatedSubscription = $this->subscriptionService->updateSubscription($subscription, $request->validated());
 
         if ($updatedSubscription) {
@@ -48,4 +47,5 @@ class SubscriptionController extends Controller
                 ->with('error', 'Failed to update subscription.');
         }
     }
+
 }

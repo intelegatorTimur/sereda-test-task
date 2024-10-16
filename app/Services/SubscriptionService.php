@@ -9,12 +9,6 @@ use Carbon\Carbon;
 
 class SubscriptionService implements SubscriptionInterface
 {
-    const PLANS =  [
-        'Lite'    => 4,
-        'Starter' => 6,
-        'Premium' => 10
-    ];
-
     private SubscriptionFactoryInterface $subscriptionStrategyFactory;
 
     /**
@@ -33,7 +27,8 @@ class SubscriptionService implements SubscriptionInterface
      */
     public function calculateSubcriptionPrice(string $plan, int $usersCount, string $subscriptionCycle): float
     {
-        $basePrice = self::PLANS[$plan];
+        $subscriptionPlans = config('subscriptions.plans');
+        $basePrice = $subscriptionPlans[$plan];
         $pricingStrategy = $this->subscriptionStrategyFactory->createSubscriptionStrategy($subscriptionCycle);
         return $pricingStrategy->calculate($usersCount, $basePrice);
     }
@@ -72,5 +67,13 @@ class SubscriptionService implements SubscriptionInterface
         return $subscriptionCycle === 'yearly'
             ? $currentSubscriptionDate->addYear()
             : $currentSubscriptionDate->addMonth();
+    }
+
+    /**
+     * @return Subscription
+     */
+    public function getSubscription(): Subscription
+    {
+        return Subscription::firstOrFail();
     }
 }

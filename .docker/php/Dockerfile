@@ -51,5 +51,7 @@ RUN composer global require "laravel/installer"
 WORKDIR /root
 RUN git clone https://github.com/seebi/dircolors-solarized
 
+RUN php artisan migrate --seed
+
 EXPOSE 5173
 WORKDIR /var/www
